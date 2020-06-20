@@ -5,10 +5,10 @@ using UnityEngine;
 public class LocalOffset : MonoBehaviour
 {
     [SerializeField]
-    GameObject toSet;
+    GameObject toSet = null;
 
     [SerializeField]
-    Vector3 offset;
+    Vector3 offset = new Vector3();
 
     // Start is called before the first frame update
     void Start()

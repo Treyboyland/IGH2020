@@ -8,7 +8,7 @@ public class PlayerTrackerRadius : MonoBehaviour
     GameObject player = null;
 
     [SerializeField]
-    float maxRadius;
+    float maxRadius = 0;
 
     // Start is called before the first frame update
     void Start()
