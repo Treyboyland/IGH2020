@@ -5,10 +5,10 @@ using UnityEngine;
 public class PickupLocation : MonoBehaviour
 {
     [SerializeField]
-    ButtonCombination combination;
+    ButtonCombination combination = null;
 
     [SerializeField]
-    Pickup pickupPrefab;
+    Pickup pickupPrefab = null;
 
     Player currentPlayer = null;
     PlayerControl currentPlayerControl = null;
@@ -16,23 +16,27 @@ public class PickupLocation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        combination.OnCombinationComplete.AddListener(() =>
+        
+    }
+
+    void GivePlayerItem()
+    {
+        if (currentPlayer != null)
         {
-            if (currentPlayer != null)
-            {
-                var pickup = (Pickup)GamePool.Pool.GetObject(pickupPrefab);
-                pickup.SetRandomLocation();
-                pickup.gameObject.SetActive(true);
-                pickup.transform.SetParent(currentPlayer.transform);
-                pickup.OffsetLocally();
-                currentPlayer.HasPickup = true;
-                currentPlayer.CurrentPickup = pickup;
-            }
-            if (currentPlayerControl != null)
-            {
-                currentPlayerControl.CanMove = true;
-            }
-        });
+            var pickup = (Pickup)GamePool.Pool.GetObject(pickupPrefab);
+            pickup.SetRandomLocation();
+            pickup.gameObject.SetActive(true);
+            pickup.transform.SetParent(currentPlayer.transform);
+            pickup.OffsetLocally();
+            currentPlayer.HasPickup = true;
+            currentPlayer.CurrentPickup = pickup;
+        }
+        if (currentPlayerControl != null)
+        {
+            currentPlayerControl.CanMove = true;
+        }
+
+        combination.OnCombinationComplete.RemoveListener(GivePlayerItem);
     }
 
 
@@ -55,7 +59,11 @@ public class PickupLocation : MonoBehaviour
                 currentPlayerControl = playerControl;
             }
             playerControl.CanMove = false;
+            combination.CurrentPlayer = player;
             combination.OnStartButtonCombination.Invoke();
+            
+
+            combination.OnCombinationComplete.AddListener(GivePlayerItem);
         }
     }
 }
