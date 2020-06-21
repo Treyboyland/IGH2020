@@ -17,6 +17,10 @@ public class ButtonCombination : MonoBehaviour
 
     public StringEvent OnNewCombination = new StringEvent();
 
+    public EmptyEvent OnGoodButton = new EmptyEvent();
+
+    public EmptyEvent OnBadButton = new EmptyEvent();
+
     List<KeyCode> Combinations = new List<KeyCode>();
 
     List<KeyCode> PossibleKeys = new List<KeyCode>()
@@ -89,7 +93,7 @@ public class ButtonCombination : MonoBehaviour
         OnNewCombination.AddListener((unused) =>
         {
             //Debug.LogWarning("NEW COMBINATION: " + unused);
-            if(CurrentPlayer != null)
+            if (CurrentPlayer != null)
             {
                 CurrentPlayer.GivenWord = unused;
             }
@@ -138,6 +142,7 @@ public class ButtonCombination : MonoBehaviour
                     {
                         //Debug.Log("Lock: " + index);
                         OnNewIndex.Invoke(index);
+                        OnGoodButton.Invoke();
                     }
                 }
                 else
@@ -146,6 +151,7 @@ public class ButtonCombination : MonoBehaviour
                     //Bad combination
                     index = 0;
                     OnNewIndex.Invoke(index);
+                    OnBadButton.Invoke();
                 }
             }
         }

@@ -33,6 +33,7 @@ public class DropoffLocation : MonoBehaviour
 
     IEnumerator Shrink() 
     {
+        currentPlayer.OnDropoffStarted.Invoke();
         float startScale = currentPlayer.CurrentPickup.gameObject.transform.localScale.x;
         for (float ft = startScale; ft > 0; ft -= 0.05f) 
         {
