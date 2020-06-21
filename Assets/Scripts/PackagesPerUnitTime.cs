@@ -21,8 +21,10 @@ public class PackagesPerUnitTime : MonoBehaviour
 
     [SerializeField]
     Material textMat;
-    Color green = new Color(19/255.0f, 161/255.0f, 43/255.0f);
+    Color green = new Color(19 / 255.0f, 161 / 255.0f, 43 / 255.0f);
     bool passing = true;
+
+    public BoolEvent OnPassingChanged = new BoolEvent();
 
     private void Start()
     {
@@ -43,17 +45,21 @@ public class PackagesPerUnitTime : MonoBehaviour
     {
         elapsed += Time.deltaTime;
 
-        if (GetRate() >= tracker.TargetRate && !passing){
+        if (GetRate() >= tracker.TargetRate && !passing)
+        {
             textMat.SetColor("_FaceColor", green);
             passing = true;
+            OnPassingChanged.Invoke(passing);
         }
-        else if (GetRate() < tracker.TargetRate && passing){
+        else if (GetRate() < tracker.TargetRate && passing)
+        {
             textMat.SetColor("_FaceColor", Color.red);
             passing = false;
+            OnPassingChanged.Invoke(passing);
         }
 
         //Technically inefficient
-        textBox.text = "Rate: " + GetRate().ToString("0.00") + " / " + tracker.TargetRate.ToString("0.00") + Environment.NewLine   + "connections per minute";
+        textBox.text = "Rate: " + GetRate().ToString("0.00") + " / " + tracker.TargetRate.ToString("0.00") + Environment.NewLine + "connections per minute";
 
     }
 

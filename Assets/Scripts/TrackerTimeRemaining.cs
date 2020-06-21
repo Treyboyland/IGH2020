@@ -33,13 +33,13 @@ public class TrackerTimeRemaining : MonoBehaviour
     void Update()
     {
         elapsed += Time.deltaTime;
-        if (elapsed >= initialTime)
+        if (elapsed >= initialTime && initialTime != 0)
         {
             tracker.OnCheckPlayerRate.Invoke();
         }
         else
         {
-            float remaining = initialTime - elapsed;
+            float remaining = initialTime - elapsed > 0 ? initialTime - elapsed : 0;
             TimeSpan ts = new TimeSpan(0, 0, 0, (int)remaining, (int)((remaining % 1) * 1000));
             textBox.text = "Time Until Review: " + ts.ToString("mm\\:ss\\.fff");
         }

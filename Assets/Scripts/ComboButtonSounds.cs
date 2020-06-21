@@ -6,28 +6,28 @@ using UnityEngine;
 public class ComboButtonSounds : MonoBehaviour
 {
     [SerializeField]
-    ButtonCombination combination;
+    ButtonCombination combination = null;
 
 
     AudioSource audioSource;
 
     [SerializeField]
-    AudioClip goodClip;
+    AudioClip goodClip = null;
 
     [SerializeField]
-    float goodClipVolume;
+    float goodClipVolume = 1.0f;
 
     [SerializeField]
-    AudioClip badClip;
+    AudioClip badClip = null;
 
     [SerializeField]
-    float badClipVolume;
+    float badClipVolume = 1.0f;
 
     [SerializeField]
-    AudioClip completeClip;
+    AudioClip completeClip = null;
 
     [SerializeField]
-    float completeClipVolume;
+    float completeClipVolume = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,14 +38,14 @@ public class ComboButtonSounds : MonoBehaviour
             audioSource.PlayOneShot(badClip, badClipVolume);
         });
 
-        combination.OnGoodButton.AddListener(() =>
-        {
-            audioSource.PlayOneShot(goodClip, goodClipVolume);
-        });
+        // combination.OnGoodButton.AddListener(() =>
+        // {
+        //     audioSource.PlayOneShot(goodClip, goodClipVolume);
+        // });
 
-        combination.OnCombinationComplete.AddListener(() =>
-        {
-            audioSource.PlayOneShot(completeClip, completeClipVolume);
-        });
+        // combination.OnCombinationComplete.AddListener(() =>
+        // {
+        //     audioSource.PlayOneShot(completeClip, completeClipVolume);
+        // });
     }
 }

@@ -1,19 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 [RequireComponent(typeof(AudioSource))]
-public class SoundOnNameInput : MonoBehaviour
+public class RateCheckSounds : MonoBehaviour
 {
     [SerializeField]
-    TMP_InputField inputField = null;
+    TaskTracker tracker;
 
     [SerializeField]
-    float volume = 1;
+    AudioClip goodClip;
 
     [SerializeField]
-    AudioClip clip = null;
+    float goodVolume;
+
+    [SerializeField]
+    AudioClip badClip;
+
+    [SerializeField]
+    float badVolume;
+
+
 
     AudioSource audioSource;
 
@@ -22,8 +29,10 @@ public class SoundOnNameInput : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        inputField.onValueChanged.AddListener((unused) =>
+        tracker.OnCheckPassed.AddListener((passed) =>
         {
+            var clip = passed ? goodClip : badClip;
+            var volume = passed ? goodVolume : badVolume;
             audioSource.PlayOneShot(clip, volume);
         });
     }

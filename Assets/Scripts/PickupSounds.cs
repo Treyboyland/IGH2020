@@ -6,19 +6,19 @@ using UnityEngine;
 public class PickupSounds : MonoBehaviour
 {
     [SerializeField]
-    Player player;
+    Player player = null;
 
     [SerializeField]
-    AudioClip pickupClip;
+    AudioClip pickupClip = null;
 
     [SerializeField]
-    float pickupVolume;
+    float pickupVolume = 1;
 
     [SerializeField]
-    AudioClip dropoffClip;
+    AudioClip dropoffClip = null;
 
     [SerializeField]
-    float dropoffVolume;
+    float dropoffVolume = 1;
 
     AudioSource audioSource;
 

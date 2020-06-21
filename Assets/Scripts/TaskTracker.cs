@@ -53,13 +53,15 @@ public class TaskTracker : MonoBehaviour
             if (passed)
             {
                 TargetRate += 0.25f;
-                SecondsUntilNextCheck = Mathf.Max(10, secondsUntilNextCheck - 1);
+                //SecondsUntilNextCheck = Mathf.Max(10, secondsUntilNextCheck - 1);
+                SecondsUntilNextCheck = SecondsUntilNextCheck;
             }
             else
             {
                 OnGameFailed.Invoke();
                 TargetRate = TargetRate;
-                SecondsUntilNextCheck = Mathf.Max(10, secondsUntilNextCheck - 5);
+                //SecondsUntilNextCheck = Mathf.Max(10, secondsUntilNextCheck - 5);
+                SecondsUntilNextCheck = 0;
             }
         });
     }
