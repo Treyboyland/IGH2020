@@ -1,0 +1,21 @@
+Untitled Game 22
+
+Developed by Gabe Fields, Roosevelt Boyland, and Hollow Earth Collective for Insert Game Here 2020
+
+Art by Gabe Fields, Jabari King, and Hollow Earth Collective
+
+142608__autistic-lucario__error.wav by autistic-lucario
+264828__cmdrobot__text-message-or-videogame-jump.ogg by cmdrobot
+277031__headphaze__ui-completed-status-alert-notification-sfx003.wav by headphaze
+WrongButton-G22.wav Generated using BFXR
+
+
+Unused Assets
+62139__tkshredder__zoomin.wav by tkshredder
+372209__original-sound__confirmation-ascending-1.mp3 by original-sound
+511609__foxzine__cinematic-sirens.wav by foxzine
+
+PickupReceived-G22.wav Generated using BFXR
+DropOffSound-G22.wav Generated using BFXR
+CombinationComplete-2-G22.wav Generated using BFXR
+ButtonSound-G22.wav Generated using BFXR
