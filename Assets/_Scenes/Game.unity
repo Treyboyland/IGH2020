@@ -1796,7 +1796,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 874dd0cd23e70da47bab6486d1755f5b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bd4ef2963863c45148375e734a3f4f6b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.063
   m_Pitch: 1
@@ -2630,11 +2630,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combination: {fileID: 1064146586}
-  goodClip: {fileID: 8300000, guid: c93da551654c35045b1f86c3fdcf7471, type: 3}
+  goodClip: {fileID: 0}
   goodClipVolume: 0.4
-  badClip: {fileID: 8300000, guid: ae4471bb8444d93489054b6937358aba, type: 3}
+  badClip: {fileID: 8300000, guid: ec691c633e1a0452dac924b80de1911b, type: 3}
   badClipVolume: 0.4
-  completeClip: {fileID: 8300000, guid: 26bb82e487d47d645aebaec0c60a3484, type: 3}
+  completeClip: {fileID: 0}
   completeClipVolume: 0.4
 --- !u!82 &1553823373
 AudioSource:
@@ -3603,9 +3603,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1841989998}
-  pickupClip: {fileID: 8300000, guid: b9cb08c283e83f84fa9fe2cf607491ab, type: 3}
+  pickupClip: {fileID: 8300000, guid: 6c7fac1aa1133449b964dbbb37f9660b, type: 3}
   pickupVolume: 0.4
-  dropoffClip: {fileID: 8300000, guid: 9623a7328d25bac41bcfd771d149dea0, type: 3}
+  dropoffClip: {fileID: 8300000, guid: c42292e6f3c624396ac073b9765b2927, type: 3}
   dropoffVolume: 0.4
 --- !u!82 &2069418890
 AudioSource:
