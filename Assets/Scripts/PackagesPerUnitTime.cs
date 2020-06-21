@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class PackagesPerUnitTime : MonoBehaviour
@@ -52,7 +53,7 @@ public class PackagesPerUnitTime : MonoBehaviour
         }
 
         //Technically inefficient
-        textBox.text = "Rate: " + GetRate().ToString("0.00") + " packages / min";
+        textBox.text = "Rate: " + GetRate().ToString("0.00") + " / " + tracker.TargetRate.ToString("0.00") + Environment.NewLine   + "packages per minute";
 
     }
 

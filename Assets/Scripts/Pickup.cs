@@ -32,8 +32,8 @@ public class Pickup : MonoBehaviour
     {
         RED,
         BLUE,
-        GREEN,
-        BLACK
+        PURPLE,
+        ORANGE
     }
 
     DropOffLocation location = DropOffLocation.RED;
@@ -74,11 +74,11 @@ public class Pickup : MonoBehaviour
         {
             case DropOffLocation.RED:
                 return new Color(243.0f/255, 28.0f/255, 6.0f/255);
-            case DropOffLocation.BLACK:
-                return new Color(230.0f/255, 126.0f/255, 34.0f/255);
+            case DropOffLocation.ORANGE:
+                return new Color(255.0f/255, 147.0f/255, 0.0f/255);
             case DropOffLocation.BLUE:
                 return new Color(52.0f/255, 152.0f/255, 219.0f/255);
-            case DropOffLocation.GREEN:
+            case DropOffLocation.PURPLE:
                 return new Color(142.0f/255, 68.0f/255, 173.0f/255);
             default:
                 return Color.white;
