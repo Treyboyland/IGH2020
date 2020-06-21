@@ -16,7 +16,7 @@ public class PickupLocation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     void GivePlayerItem()
@@ -30,6 +30,7 @@ public class PickupLocation : MonoBehaviour
             pickup.OffsetLocally();
             currentPlayer.HasPickup = true;
             currentPlayer.CurrentPickup = pickup;
+            currentPlayer.FirePickupEvent();
         }
         if (currentPlayerControl != null)
         {
@@ -61,7 +62,7 @@ public class PickupLocation : MonoBehaviour
             playerControl.CanMove = false;
             combination.CurrentPlayer = player;
             combination.OnStartButtonCombination.Invoke();
-            
+
 
             combination.OnCombinationComplete.AddListener(GivePlayerItem);
         }

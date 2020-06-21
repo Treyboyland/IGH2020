@@ -28,3 +28,5 @@ Value
 Optimal
 Meeting
 Perfection
+Asset
+Resource

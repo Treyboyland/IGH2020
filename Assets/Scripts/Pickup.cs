@@ -9,6 +9,21 @@ public class Pickup : MonoBehaviour
     [SerializeField]
     Vector3 offset = new Vector3();
 
+    [SerializeField]
+    SpriteRenderer backgroundSprite;
+
+    [SerializeField]
+    List<Sprite> possibleSprites = new List<Sprite>();
+
+    Sprite currentSprite = null;
+
+    public Sprite CurrentSprite
+    {
+        get
+        {
+            return currentSprite;
+        }
+    }
 
     SpriteRenderer spriteRenderer;
 
@@ -34,16 +49,22 @@ public class Pickup : MonoBehaviour
             location = value;
             spriteRenderer = spriteRenderer == null ? GetComponent<SpriteRenderer>() : spriteRenderer;
 
+            if (backgroundSprite != null)
+            {
+                backgroundSprite.color = LocationToColor(location);
+            }
             if (spriteRenderer != null)
             {
-                spriteRenderer.color = LocationToColor(location);
+                spriteRenderer.sprite = currentSprite;
             }
+
         }
     }
 
     public void SetRandomLocation()
     {
         var locations = Enum.GetNames(typeof(DropOffLocation));
+        currentSprite = possibleSprites[UnityEngine.Random.Range(0, possibleSprites.Count)];
         Location = (DropOffLocation)Enum.Parse(typeof(DropOffLocation), locations[UnityEngine.Random.Range(0, locations.Length)]);
     }
 
@@ -56,7 +77,7 @@ public class Pickup : MonoBehaviour
             case DropOffLocation.BLACK:
                 return Color.black;
             case DropOffLocation.BLUE:
-                return Color.blue;
+                return new Color(0.0f, 47.0f / 255.0f, 255.0f, 1.0f);
             case DropOffLocation.GREEN:
                 return Color.green;
             default:

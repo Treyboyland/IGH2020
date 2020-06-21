@@ -8,3 +8,5 @@ public class StringEvent : UnityEvent<string> { }
 public class EmptyEvent : UnityEvent{ }
 
 public class IntEvent : UnityEvent<int> { }
+
+public class PickupEvent : UnityEvent<Pickup> { }

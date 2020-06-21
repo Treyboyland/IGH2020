@@ -8,7 +8,7 @@ public class DropoffLocation : MonoBehaviour
     [SerializeField]
     Pickup.DropOffLocation Location = Pickup.DropOffLocation.RED;
 
-    
+
     ButtonCombination combination = null;
 
     SpriteRenderer spriteRenderer = null;
@@ -31,6 +31,8 @@ public class DropoffLocation : MonoBehaviour
         currentPlayer.CurrentPickup = null;
 
         currentPlayerControl.CanMove = true;
+        currentPlayer.DropsCompleted++;
+        currentPlayer.OnDropoffComplete.Invoke();
         combination.OnCombinationComplete.RemoveListener(ReleasePlayer);
     }
 

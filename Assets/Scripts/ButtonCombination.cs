@@ -88,7 +88,7 @@ public class ButtonCombination : MonoBehaviour
         OnStartButtonCombinationDrop.AddListener(SetStringCombination);
         OnNewCombination.AddListener((unused) =>
         {
-            Debug.LogWarning("NEW COMBINATION: " + unused);
+            //Debug.LogWarning("NEW COMBINATION: " + unused);
             if(CurrentPlayer != null)
             {
                 CurrentPlayer.GivenWord = unused;
@@ -108,7 +108,7 @@ public class ButtonCombination : MonoBehaviour
     {
         foreach (var asset in words)
         {
-            foreach (var word in asset.text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var word in asset.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 possibleWords.Add(word.ToUpper());
             }

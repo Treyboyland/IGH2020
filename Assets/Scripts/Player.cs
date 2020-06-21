@@ -22,11 +22,43 @@ public class Player : MonoBehaviour
         {
             if (dropsCompleted != value)
             {
+                if (dropsCompleted < value)
+                {
+                    TotalDropsCompleted += value - dropsCompleted;
+                }
                 dropsCompleted = value;
                 OnDropsUpdated.Invoke(dropsCompleted);
             }
         }
     }
 
+    int totalDropsCompleted = 0;
+
+    public int TotalDropsCompleted
+    {
+        get
+        {
+            return totalDropsCompleted;
+        }
+        set
+        {
+            if (totalDropsCompleted != value)
+            {
+                totalDropsCompleted = value;
+            }
+        }
+    }
+
     public IntEvent OnDropsUpdated = new IntEvent();
+
+    public IntEvent OnTotalDropsUpdated = new IntEvent();
+
+    public PickupEvent OnNewPickup = new PickupEvent();
+
+    public EmptyEvent OnDropoffComplete = new EmptyEvent();
+
+    public void FirePickupEvent()
+    {
+        OnNewPickup.Invoke(CurrentPickup);
+    }
 }
