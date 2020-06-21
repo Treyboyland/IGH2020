@@ -20,7 +20,7 @@ public class MessageController : MonoBehaviour
         "You're a quick learner! Now take the content to the bin with the matching color and re-enter the code to drop it off.",
         "We have a lot of content to deliver, so make sure not to let your rate on the left fall below the target.",
         "Every 60 seconds we conduct a performance review to make sure you're meeting our high standards.",
-        "Unfortunately if you fall behind at a performance review (process rate in red), I'm afraid we'll have to let you go :/",
+        "Unfortunately if you fall behind at a performance review, I'm afraid we'll have to let you go :/",
         "To maximize efficiency and professionalism, we've taken the liberty to change your name to 5265736f75726365."
     };
 
