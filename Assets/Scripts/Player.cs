@@ -8,15 +8,59 @@ public class Player : MonoBehaviour
 
     public Pickup CurrentPickup = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public string GivenWord = "";
 
+    int dropsCompleted = 0;
+
+    public int DropsCompleted
+    {
+        get
+        {
+            return dropsCompleted;
+        }
+        set
+        {
+            if (dropsCompleted != value)
+            {
+                if (dropsCompleted < value)
+                {
+                    TotalDropsCompleted += value - dropsCompleted;
+                }
+                dropsCompleted = value;
+                OnDropsUpdated.Invoke(dropsCompleted);
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    int totalDropsCompleted = 0;
 
+    public int TotalDropsCompleted
+    {
+        get
+        {
+            return totalDropsCompleted;
+        }
+        set
+        {
+            if (totalDropsCompleted != value)
+            {
+                totalDropsCompleted = value;
+            }
+        }
+    }
+
+    public IntEvent OnDropsUpdated = new IntEvent();
+
+    public IntEvent OnTotalDropsUpdated = new IntEvent();
+
+    public PickupEvent OnNewPickup = new PickupEvent();
+
+    public EmptyEvent OnDropoffComplete = new EmptyEvent();
+
+    public EmptyEvent OnDropoffStarted = new EmptyEvent();
+
+    public void FirePickupEvent()
+    {
+        OnNewPickup.Invoke(CurrentPickup);
     }
 }

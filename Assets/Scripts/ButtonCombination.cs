@@ -9,11 +9,17 @@ public class ButtonCombination : MonoBehaviour
 {
     public EmptyEvent OnStartButtonCombination = new EmptyEvent();
 
+    public StringEvent OnStartButtonCombinationDrop = new StringEvent();
+
     public EmptyEvent OnCombinationComplete = new EmptyEvent();
 
     public IntEvent OnNewIndex = new IntEvent();
 
     public StringEvent OnNewCombination = new StringEvent();
+
+    public EmptyEvent OnGoodButton = new EmptyEvent();
+
+    public EmptyEvent OnBadButton = new EmptyEvent();
 
     List<KeyCode> Combinations = new List<KeyCode>();
 
@@ -50,11 +56,21 @@ public class ButtonCombination : MonoBehaviour
     [SerializeField]
     int numButtons = 0;
 
+    [SerializeField]
+    bool isRandom = false;
+
+    [SerializeField]
+    List<TextAsset> words = new List<TextAsset>();
+
+    List<string> possibleWords = new List<string>();
+
     List<KeyCode> combination = new List<KeyCode>();
 
     int index = 0;
 
     bool isDoingTest = false;
+
+    public Player CurrentPlayer = null;
 
     // Start is called before the first frame update
     void Start()
@@ -63,11 +79,24 @@ public class ButtonCombination : MonoBehaviour
         {
             if (!isDoingTest)
             {
-                CreateRandomButtonCombination();
+                if (isRandom)
+                {
+                    CreateRandomButtonCombination();
+                }
+                else
+                {
+                    CreateStringCombination();
+                }
             }
         });
+        OnStartButtonCombinationDrop.AddListener(SetStringCombination);
         OnNewCombination.AddListener((unused) =>
         {
+            //Debug.LogWarning("NEW COMBINATION: " + unused);
+            if (CurrentPlayer != null)
+            {
+                CurrentPlayer.GivenWord = unused;
+            }
             isDoingTest = true;
             index = 0;
         });
@@ -75,6 +104,19 @@ public class ButtonCombination : MonoBehaviour
         {
             isDoingTest = false;
         });
+
+        ParseWords();
+    }
+
+    void ParseWords()
+    {
+        foreach (var asset in words)
+        {
+            foreach (var word in asset.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                possibleWords.Add(word.ToUpper());
+            }
+        }
     }
 
     public void StartButtonCombination()
@@ -100,6 +142,7 @@ public class ButtonCombination : MonoBehaviour
                     {
                         //Debug.Log("Lock: " + index);
                         OnNewIndex.Invoke(index);
+                        OnGoodButton.Invoke();
                     }
                 }
                 else
@@ -108,6 +151,7 @@ public class ButtonCombination : MonoBehaviour
                     //Bad combination
                     index = 0;
                     OnNewIndex.Invoke(index);
+                    OnBadButton.Invoke();
                 }
             }
         }
@@ -133,5 +177,41 @@ public class ButtonCombination : MonoBehaviour
         OnNewCombination.Invoke(sb.ToString());
     }
 
+    void CreateStringCombination()
+    {
+        combination.Clear();
+        var combo = possibleWords[UnityEngine.Random.Range(0, possibleWords.Count)];
 
+        Debug.LogWarning(combo);
+
+        combination.AddRange(StringToCodes(combo));
+
+        OnNewCombination.Invoke(combo);
+    }
+
+    void SetStringCombination(string code)
+    {
+        combination.Clear();
+        combination.AddRange(StringToCodes(code));
+        OnNewCombination.Invoke(code);
+    }
+
+    public static List<KeyCode> StringToCodes(string text)
+    {
+        List<KeyCode> toReturn = new List<KeyCode>(text.Length);
+
+        foreach (var character in text.ToUpper())
+        {
+            try
+            {
+                toReturn.Add((KeyCode)Enum.Parse(typeof(KeyCode), "" + character));
+            }
+            catch
+            {
+                continue;
+            }
+        }
+
+        return toReturn;
+    }
 }

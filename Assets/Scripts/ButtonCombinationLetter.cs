@@ -7,10 +7,10 @@ using TMPro;
 public class ButtonCombinationLetter : MonoBehaviour
 {
     [SerializeField]
-    Color normalColor = Color.black;
+    Color normalColor = Color.white;
 
     [SerializeField]
-    Color completedColor = Color.black;
+    Color completedColor = Color.green;
 
     TextMeshProUGUI textBox;
 

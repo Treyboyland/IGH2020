@@ -5,10 +5,10 @@ using UnityEngine;
 public class PickupLocation : MonoBehaviour
 {
     [SerializeField]
-    ButtonCombination combination;
+    ButtonCombination combination = null;
 
     [SerializeField]
-    Pickup pickupPrefab;
+    Pickup pickupPrefab = null;
 
     Player currentPlayer = null;
     PlayerControl currentPlayerControl = null;
@@ -16,23 +16,49 @@ public class PickupLocation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        combination.OnCombinationComplete.AddListener(() =>
+
+    }
+
+    void GivePlayerItem()
+    {
+        if (currentPlayer != null)
         {
-            if (currentPlayer != null)
-            {
-                var pickup = (Pickup)GamePool.Pool.GetObject(pickupPrefab);
-                pickup.SetRandomLocation();
-                pickup.gameObject.SetActive(true);
-                pickup.transform.SetParent(currentPlayer.transform);
-                pickup.OffsetLocally();
-                currentPlayer.HasPickup = true;
-                currentPlayer.CurrentPickup = pickup;
-            }
-            if (currentPlayerControl != null)
-            {
-                currentPlayerControl.CanMove = true;
-            }
-        });
+            var pickup = (Pickup)GamePool.Pool.GetObject(pickupPrefab);
+            pickup.SetRandomLocation();
+            
+            pickup.transform.SetParent(currentPlayer.transform);
+            pickup.OffsetLocally();
+            currentPlayer.HasPickup = true;
+            currentPlayer.CurrentPickup = pickup;
+            currentPlayer.FirePickupEvent();
+
+            StartCoroutine("Grow");
+        }
+
+        combination.OnCombinationComplete.RemoveListener(GivePlayerItem);
+    }
+
+    IEnumerator Grow() 
+    {
+        float startScale = currentPlayer.CurrentPickup.gameObject.transform.localScale.x;
+        currentPlayer.CurrentPickup.gameObject.transform.localScale = new Vector3(0,0,0);
+        currentPlayer.CurrentPickup.gameObject.SetActive(true);
+
+        for (float ft = 0; ft <= startScale; ft += 0.05f) 
+        {
+            Vector3 scale = new Vector3(ft, ft, ft);
+            currentPlayer.CurrentPickup.gameObject.transform.localScale = scale;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        currentPlayer.CurrentPickup.gameObject.transform.localScale = new Vector3(startScale,startScale,startScale);
+
+        if (currentPlayerControl != null)
+        {
+            currentPlayerControl.CanMove = true;
+        }
+
+        
     }
 
 
@@ -55,7 +81,11 @@ public class PickupLocation : MonoBehaviour
                 currentPlayerControl = playerControl;
             }
             playerControl.CanMove = false;
+            combination.CurrentPlayer = player;
             combination.OnStartButtonCombination.Invoke();
+
+
+            combination.OnCombinationComplete.AddListener(GivePlayerItem);
         }
     }
 }
