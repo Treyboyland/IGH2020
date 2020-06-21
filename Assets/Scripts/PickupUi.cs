@@ -27,10 +27,18 @@ public class PickupUi : MonoBehaviour
         var backColor = background.color;
         backColor.a = 0;
         var foreColor = foreground.color;
-        foreColor.a = 0;
+        foreColor.a = 100;
 
         background.color = backColor;
         foreground.color = foreColor;
+    }
+
+    IEnumerator Shrink() 
+    {
+        for (float ft = 1f; ft >= 0; ft -= 0.1f) 
+        {
+            yield return null;
+        }
     }
 
     void SetPickup(Pickup pickup)

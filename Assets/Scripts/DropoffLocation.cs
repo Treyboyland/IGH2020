@@ -15,6 +15,7 @@ public class DropoffLocation : MonoBehaviour
 
     Player currentPlayer = null;
     PlayerControl currentPlayerControl = null;
+    bool shrinking = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,21 @@ public class DropoffLocation : MonoBehaviour
     void ReleasePlayer()
     {
         currentPlayer.HasPickup = false;
+        StartCoroutine("Shrink");
+    }
+
+    IEnumerator Shrink() 
+    {
+        float startScale = currentPlayer.CurrentPickup.gameObject.transform.localScale.x;
+        for (float ft = startScale; ft > 0; ft -= 0.05f) 
+        {
+            Vector3 scale = new Vector3(ft, ft, ft);
+            currentPlayer.CurrentPickup.gameObject.transform.localScale = scale;
+            yield return new WaitForSeconds(0.01f);
+        }
+
         currentPlayer.CurrentPickup.gameObject.SetActive(false);
+        currentPlayer.CurrentPickup.gameObject.transform.localScale = new Vector3(startScale, startScale, startScale);
         currentPlayer.CurrentPickup = null;
 
         currentPlayerControl.CanMove = true;

@@ -73,13 +73,13 @@ public class Pickup : MonoBehaviour
         switch (location)
         {
             case DropOffLocation.RED:
-                return Color.red;
+                return new Color(243.0f/255, 28.0f/255, 6.0f/255);
             case DropOffLocation.BLACK:
-                return Color.black;
+                return new Color(230.0f/255, 126.0f/255, 34.0f/255);
             case DropOffLocation.BLUE:
-                return new Color(0.0f, 47.0f / 255.0f, 255.0f, 1.0f);
+                return new Color(52.0f/255, 152.0f/255, 219.0f/255);
             case DropOffLocation.GREEN:
-                return Color.green;
+                return new Color(142.0f/255, 68.0f/255, 173.0f/255);
             default:
                 return Color.white;
         }

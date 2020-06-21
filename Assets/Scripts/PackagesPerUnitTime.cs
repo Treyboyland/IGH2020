@@ -18,6 +18,11 @@ public class PackagesPerUnitTime : MonoBehaviour
 
     TaskTracker tracker;
 
+    [SerializeField]
+    Material textMat;
+    Color green = new Color(19/255.0f, 161/255.0f, 43/255.0f);
+    bool passing = true;
+
     private void Start()
     {
         tracker = GetComponentInParent<TaskTracker>();
@@ -37,8 +42,18 @@ public class PackagesPerUnitTime : MonoBehaviour
     {
         elapsed += Time.deltaTime;
 
+        if (GetRate() >= tracker.TargetRate && !passing){
+            textMat.SetColor("_FaceColor", green);
+            passing = true;
+        }
+        else if (GetRate() < tracker.TargetRate && passing){
+            textMat.SetColor("_FaceColor", Color.red);
+            passing = false;
+        }
+
         //Technically inefficient
-        textBox.text = "Rate: " + GetRate().ToString("0.00") + " packages";
+        textBox.text = "Rate: " + GetRate().ToString("0.00") + " packages / min";
+
     }
 
     public float GetRate()

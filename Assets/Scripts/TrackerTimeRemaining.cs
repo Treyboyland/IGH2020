@@ -41,7 +41,7 @@ public class TrackerTimeRemaining : MonoBehaviour
         {
             float remaining = initialTime - elapsed;
             TimeSpan ts = new TimeSpan(0, 0, 0, (int)remaining, (int)((remaining % 1) * 1000));
-            textBox.text = "Time Remaining: " + ts.ToString("mm\\:ss\\.fff");
+            textBox.text = "Time Until Review: " + ts.ToString("mm\\:ss\\.fff");
         }
     }
 }
