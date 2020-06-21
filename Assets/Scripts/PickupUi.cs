@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class PickupUi : MonoBehaviour
 {
     [SerializeField]
-    Image background;
+    Image background = null;
 
     [SerializeField]
-    Image foreground;
+    Image foreground = null;
 
     [SerializeField]
-    Player player;
+    Player player = null;
 
     // Start is called before the first frame update
     void Start()

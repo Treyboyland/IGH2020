@@ -10,7 +10,7 @@ public class Pickup : MonoBehaviour
     Vector3 offset = new Vector3();
 
     [SerializeField]
-    SpriteRenderer backgroundSprite;
+    SpriteRenderer backgroundSprite = null;
 
     [SerializeField]
     List<Sprite> possibleSprites = new List<Sprite>();

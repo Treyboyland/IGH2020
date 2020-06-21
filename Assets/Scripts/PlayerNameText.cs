@@ -4,25 +4,20 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class PlayerProcessedCount : MonoBehaviour
+public class PlayerNameText : MonoBehaviour
 {
-    [SerializeField]
-    Player player = null;
-
     TextMeshProUGUI textBox;
-
 
     // Start is called before the first frame update
     void Start()
     {
         textBox = GetComponent<TextMeshProUGUI>();
-        player.OnDropsUpdated.AddListener(SetProcessedCount);
-
-        SetProcessedCount(player.DropsCompleted);
+        textBox.text = "Name: " + GameConstants.InputName;
     }
 
-    void SetProcessedCount(int count)
+    void SetRandomIntegerName()
     {
-        textBox.text = "Processed: " + count;
+        textBox.text = "E-" + UnityEngine.Random.Range(0, 100000).ToString().PadLeft(5, '0');
+        GameConstants.CurrentName = textBox.text;
     }
 }
