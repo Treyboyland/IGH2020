@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
 
     public EmptyEvent OnDropoffComplete = new EmptyEvent();
 
+    public EmptyEvent OnDropoffStarted = new EmptyEvent();
+
     public void FirePickupEvent()
     {
         OnNewPickup.Invoke(CurrentPickup);
