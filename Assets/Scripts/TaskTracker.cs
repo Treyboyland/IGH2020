@@ -44,6 +44,8 @@ public class TaskTracker : MonoBehaviour
 
     public BoolEvent OnCheckPassed = new BoolEvent();
 
+    public EmptyEvent OnGameFailed = new EmptyEvent();
+
     private void Start()
     {
         OnCheckPassed.AddListener((passed) =>
@@ -55,6 +57,7 @@ public class TaskTracker : MonoBehaviour
             }
             else
             {
+                OnGameFailed.Invoke();
                 TargetRate = TargetRate;
                 SecondsUntilNextCheck = Mathf.Max(10, secondsUntilNextCheck - 5);
             }

@@ -53,7 +53,7 @@ public class PackagesPerUnitTime : MonoBehaviour
         }
 
         //Technically inefficient
-        textBox.text = "Rate: " + GetRate().ToString("0.00") + " / " + tracker.TargetRate.ToString("0.00") + Environment.NewLine   + "packages per minute";
+        textBox.text = "Rate: " + GetRate().ToString("0.00") + " / " + tracker.TargetRate.ToString("0.00") + Environment.NewLine   + "connections per minute";
 
     }
 
